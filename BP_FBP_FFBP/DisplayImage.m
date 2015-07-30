@@ -5,9 +5,9 @@ imagesc(x_vec, y_vec, 20*log10(abs(Reconstruction)/max(max(abs(Reconstruction)))
 axis xy image;
 h=title(ImageTitle);
 set(h, 'FontSize', FontSize);
-h = xlabel('x (m)');
+h = xlabel('x [m]');
 set(h, 'FontSize', FontSize);
-h = ylabel('y (m)');
+h = ylabel('y [m]');
 set(h, 'FontSize', FontSize);
 colorbar('hide');
 colormap ('hot');
