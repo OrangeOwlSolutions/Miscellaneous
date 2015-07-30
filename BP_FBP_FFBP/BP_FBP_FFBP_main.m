@@ -117,44 +117,47 @@ b = 128; %last used pulse
 %%%%%%%%%%%%%%%%%
 % BP USING NFFT %
 %%%%%%%%%%%%%%%%%
-Reconstruction_BP = BP_NFFT(data, a, b);
-DisplayImage(1, x_vec, y_vec, Reconstruction_BP, dyn_range, 'BP - NFFT', FontSize)
+% Reconstruction_BP = BP_NFFT(data, a, b);
+% DisplayImage(1, x_vec, y_vec, Reconstruction_BP, dyn_range, 'BP - NFFT', FontSize)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%
 % BP USING INTERPOLATORS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%
-Reconstruction_BP_Interp = BP(data,a,b);
-DisplayImage(2, x_vec, y_vec, Reconstruction_BP_Interp.Nearest,  dyn_range, 'BP - Nearest',                 FontSize)
-DisplayImage(3, x_vec, y_vec, Reconstruction_BP_Interp.Linear,   dyn_range, 'BP - Linear',                  FontSize)
-DisplayImage(4, x_vec, y_vec, Reconstruction_BP_Interp.Cubic,    dyn_range, 'BP - Cubic',                   FontSize)
-DisplayImage(5, x_vec, y_vec, Reconstruction_BP_Interp.Spline,   dyn_range, 'BP - Spline',                  FontSize)
-DisplayImage(6, x_vec, y_vec, Reconstruction_BP_Interp.Knab,     dyn_range, 'BP - Knab window',             FontSize)
-DisplayImage(7, x_vec, y_vec, Reconstruction_BP_Interp.RectNFFT, dyn_range, 'BP - NFFT with rect window',   FontSize)
-DisplayImage(8, x_vec, y_vec, Reconstruction_BP_Interp.KnabNFFT, dyn_range, 'BP - NFFT with Knab window',   FontSize)
+% Reconstruction_BP_Interp = BP(data,a,b);
+% DisplayImage(2, x_vec, y_vec, Reconstruction_BP_Interp.Nearest,  dyn_range, 'BP - Nearest',                 FontSize)
+% DisplayImage(3, x_vec, y_vec, Reconstruction_BP_Interp.Linear,   dyn_range, 'BP - Linear',                  FontSize)
+% DisplayImage(4, x_vec, y_vec, Reconstruction_BP_Interp.Cubic,    dyn_range, 'BP - Cubic',                   FontSize)
+% DisplayImage(5, x_vec, y_vec, Reconstruction_BP_Interp.Spline,   dyn_range, 'BP - Spline',                  FontSize)
+% DisplayImage(6, x_vec, y_vec, Reconstruction_BP_Interp.Knab,     dyn_range, 'BP - Knab window',             FontSize)
+% DisplayImage(7, x_vec, y_vec, Reconstruction_BP_Interp.RectNFFT, dyn_range, 'BP - NFFT with rect window',   FontSize)
+% DisplayImage(8, x_vec, y_vec, Reconstruction_BP_Interp.KnabNFFT, dyn_range, 'BP - NFFT with Knab window',   FontSize)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FBP USING INTERPOLATORS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
-Reconstruction_FBP_Interp = FBP(data, a, b);
-DisplayImage(9,  x_vec, y_vec, Reconstruction_FBP_Interp.Nearest,   dyn_range, 'FBP - Nearest',                 FontSize)
-DisplayImage(10, x_vec, y_vec, Reconstruction_FBP_Interp.Linear,    dyn_range, 'FBP - Linear',                  FontSize)
-DisplayImage(11, x_vec, y_vec, Reconstruction_FBP_Interp.Cubic,     dyn_range, 'FBP - Cubic',                   FontSize)
-DisplayImage(12, x_vec, y_vec, Reconstruction_FBP_Interp.Spline,    dyn_range, 'FBP - Spline',                  FontSize)
-DisplayImage(13, x_vec, y_vec, Reconstruction_FBP_Interp.knab,      dyn_range, 'FBP - Knab window',             FontSize)
-DisplayImage(14, x_vec, y_vec, Reconstruction_FBP_Interp.knabNFFT,  dyn_range, 'FBP - NFFT with Knab window',   FontSize)
-DisplayImage(15, x_vec, y_vec, Reconstruction_FBP_Interp.rectNFFT,  dyn_range, 'FBP - NFFT with rect window',   FontSize)
+% Reconstruction_FBP_Interp = FBP(data, a, b);
+% DisplayImage(9,  x_vec, y_vec, Reconstruction_FBP_Interp.Nearest,   dyn_range, 'FBP - Nearest',                 FontSize)
+% DisplayImage(10, x_vec, y_vec, Reconstruction_FBP_Interp.Linear,    dyn_range, 'FBP - Linear',                  FontSize)
+% DisplayImage(11, x_vec, y_vec, Reconstruction_FBP_Interp.Cubic,     dyn_range, 'FBP - Cubic',                   FontSize)
+% DisplayImage(12, x_vec, y_vec, Reconstruction_FBP_Interp.Spline,    dyn_range, 'FBP - Spline',                  FontSize)
+% DisplayImage(13, x_vec, y_vec, Reconstruction_FBP_Interp.knab,      dyn_range, 'FBP - Knab window',             FontSize)
+% DisplayImage(14, x_vec, y_vec, Reconstruction_FBP_Interp.knabNFFT,  dyn_range, 'FBP - NFFT with Knab window',   FontSize)
+% DisplayImage(15, x_vec, y_vec, Reconstruction_FBP_Interp.rectNFFT,  dyn_range, 'FBP - NFFT with rect window',   FontSize)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % FFBP USING INTERPOLATORS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Reconstruction_FFBP_Interp = FFBP(data, a, b);
-DisplayImage(16, x_vec, y_vec, Reconstruction_FFBP_Interp.Nearest,     dyn_range, 'FFBP - Nearest',                FontSize)
-DisplayImage(17, x_vec, y_vec, Reconstruction_FFBP_Interp.Linear,      dyn_range, 'FFBP - Linear',                 FontSize)
-DisplayImage(18, x_vec, y_vec, Reconstruction_FFBP_Interp.Cubic,       dyn_range, 'FFBP - Cubic',                  FontSize)
-DisplayImage(19, x_vec, y_vec, Reconstruction_FFBP_Interp.Spline,      dyn_range, 'FFBP - Spline',                 FontSize)
-DisplayImage(20, x_vec, y_vec, Reconstruction_FFBP_Interp.knab,        dyn_range, 'FFBP - Knab window',            FontSize)
-DisplayImage(21, x_vec, y_vec, Reconstruction_FFBP_Interp.knabNFFT,    dyn_range, 'FFBP - NFFT with Knab window',  FontSize)
-DisplayImage(22, x_vec, y_vec, Reconstruction_FFBP_Interp.rectNFFT,    dyn_range, 'FFBP - NFFT with rect window',  FontSize)
+% Reconstruction_FFBP_Interp = FFBP(data, a, b);
+% DisplayImage(16, x_vec, y_vec, Reconstruction_FFBP_Interp.Nearest,     dyn_range, 'FFBP - Nearest',                FontSize)
+% DisplayImage(17, x_vec, y_vec, Reconstruction_FFBP_Interp.Linear,      dyn_range, 'FFBP - Linear',                 FontSize)
+% DisplayImage(18, x_vec, y_vec, Reconstruction_FFBP_Interp.Cubic,       dyn_range, 'FFBP - Cubic',                  FontSize)
+% DisplayImage(19, x_vec, y_vec, Reconstruction_FFBP_Interp.Spline,      dyn_range, 'FFBP - Spline',                 FontSize)
+% DisplayImage(20, x_vec, y_vec, Reconstruction_FFBP_Interp.knab,        dyn_range, 'FFBP - Knab window',            FontSize)
+% DisplayImage(21, x_vec, y_vec, Reconstruction_FFBP_Interp.knabNFFT,    dyn_range, 'FFBP - NFFT with Knab window',  FontSize)
+% DisplayImage(22, x_vec, y_vec, Reconstruction_FFBP_Interp.rectNFFT,    dyn_range, 'FFBP - NFFT with rect window',  FontSize)
+
+load Test.mat
+load Test2.mat
 
 % return
 
@@ -175,17 +178,17 @@ Reconstruction_FBP_Nearest      = Reconstruction_FBP_Interp.Nearest     ./ max(m
 Reconstruction_FBP_Linear       = Reconstruction_FBP_Interp.Linear      ./ max(max(abs(Reconstruction_FBP_Interp.Linear)));
 Reconstruction_FBP_Cubic        = Reconstruction_FBP_Interp.Cubic       ./ max(max(abs(Reconstruction_FBP_Interp.Cubic)));
 Reconstruction_FBP_Spline       = Reconstruction_FBP_Interp.Spline      ./ max(max(abs(Reconstruction_FBP_Interp.Spline)));
-Reconstruction_FBP_Knab         = Reconstruction_FBP_Interp.Knab        ./ max(max(abs(Reconstruction_FBP_Interp.Knab)));
-Reconstruction_FBP_RectNFFT     = Reconstruction_FBP_Interp.RectNFFT    ./ max(max(abs(Reconstruction_FBP_Interp.RectNFFT)));
-Reconstruction_FBP_KnabNFFT     = Reconstruction_FBP_Interp.KnabNFFT    ./ max(max(abs(Reconstruction_FBP_Interp.KnabNFFT)));
+Reconstruction_FBP_Knab         = Reconstruction_FBP_Interp.knab        ./ max(max(abs(Reconstruction_FBP_Interp.knab)));
+Reconstruction_FBP_RectNFFT     = Reconstruction_FBP_Interp.rectNFFT    ./ max(max(abs(Reconstruction_FBP_Interp.rectNFFT)));
+Reconstruction_FBP_KnabNFFT     = Reconstruction_FBP_Interp.knabNFFT    ./ max(max(abs(Reconstruction_FBP_Interp.knabNFFT)));
 
 Reconstruction_FFBP_Nearest     = Reconstruction_FFBP_Interp.Nearest    ./ max(max(abs(Reconstruction_FFBP_Interp.Nearest)));
 Reconstruction_FFBP_Linear      = Reconstruction_FFBP_Interp.Linear     ./ max(max(abs(Reconstruction_FFBP_Interp.Linear)));
 Reconstruction_FFBP_Cubic       = Reconstruction_FFBP_Interp.Cubic      ./ max(max(abs(Reconstruction_FFBP_Interp.Cubic)));
 Reconstruction_FFBP_Spline      = Reconstruction_FFBP_Interp.Spline     ./ max(max(abs(Reconstruction_FFBP_Interp.Spline)));
-Reconstruction_FFBP_Knab        = Reconstruction_FFBP_Interp.Knab       ./ max(max(abs(Reconstruction_FFBP_Interp.Knab)));
-Reconstruction_FFBP_RectNFFT    = Reconstruction_FFBP_Interp.RectNFFT   ./ max(max(abs(Reconstruction_FFBP_Interp.RectNFFT)));
-Reconstruction_FFBP_KnabNFFT    = Reconstruction_FFBP_Interp.KnabNFFT   ./ max(max(abs(Reconstruction_FFBP_Interp.KnabNFFT)));
+Reconstruction_FFBP_Knab        = Reconstruction_FFBP_Interp.knab       ./ max(max(abs(Reconstruction_FFBP_Interp.knab)));
+Reconstruction_FFBP_RectNFFT    = Reconstruction_FFBP_Interp.rectNFFT   ./ max(max(abs(Reconstruction_FFBP_Interp.rectNFFT)));
+Reconstruction_FFBP_KnabNFFT    = Reconstruction_FFBP_Interp.knabNFFT   ./ max(max(abs(Reconstruction_FFBP_Interp.knabNFFT)));
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ROOT MEAN SQUARE ERRORS %
@@ -223,340 +226,69 @@ RMS.FFBP_Knab         = 100 * sqrt((sum(sum(abs(((Reference_reconstruction - Rec
 RMS.FFBP_RectNFFT     = 100 * sqrt((sum(sum(abs(((Reference_reconstruction - Reconstruction_FFBP_RectNFFT)).^2)))) / sum(sum(abs((Reference_reconstruction).^2))));
 RMS.FFBP_KnabNFFT     = 100 * sqrt((sum(sum(abs(((Reference_reconstruction - Reconstruction_FFBP_KnabNFFT)).^2)))) / sum(sum(abs((Reference_reconstruction).^2))));
 
-return
+%%%%%%%%%%%%%%%%%
+% ERROR FIGURES %
+%%%%%%%%%%%%%%%%%
+
+LineWidth = 2;
 
 figure
-mesh(x_vec,y_vec,20*log10(abs(Reference_reconstruction - knabnufft1D_BP)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Back Projection (with Knab Window & NUFFT)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_BP_Nearest(:, Np/2))),  'g', 'LineWidth', LineWidth)
+hold on
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_BP_Linear(:, Np/2))),   'c', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_BP_Cubic(:, Np/2))),    'r', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_BP_Spline(:, Np/2))),   'k', 'LineWidth', LineWidth)
+% plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_BP_RectNFFT(:, Np/2))), 'm', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_BP_KnabNFFT(:, Np/2))), 'b', 'LineWidth', LineWidth)
+% plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_BP_Knab(:, Np/2))),     'y', 'LineWidth', LineWidth)
+h=title('BP');
+set(h, 'FontSize', FontSize);
+h = xlabel('x [m]');
+set(h, 'FontSize', FontSize);
+h = ylabel('Error [dB]');
+set(h, 'FontSize', FontSize);
+set(gca, 'FontSize', FontSize);
+% legend('Nearest','Linear','Cubic','Spline','Rect NUFFT','Knab NUFFT','Knab')
+legend('Nearest','Linear','Cubic','Spline','Knab NUFFT')
+axis([min(x_vec) max(x_vec) -300 0])
 
 figure
-mesh(x_vec,y_vec,20*log10(abs(Reference_reconstruction - knab1D_BP)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Back Projection (with Knab approach in the time domain)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FBP_Nearest(:, Np/2))),  'g', 'LineWidth', LineWidth)
+hold on
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FBP_Linear(:, Np/2))),   'c', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FBP_Cubic(:, Np/2))),    'r', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FBP_Spline(:, Np/2))),   'k', 'LineWidth', LineWidth)
+% plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FBP_RectNFFT(:, Np/2))), 'm', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FBP_KnabNFFT(:, Np/2))), 'b', 'LineWidth', LineWidth)
+% plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FBP_Knab(:, Np/2))),     'y', 'LineWidth', LineWidth)
+h=title('FBP');
+set(h, 'FontSize', FontSize);
+h = xlabel('x [m]');
+set(h, 'FontSize', FontSize);
+h = ylabel('Error [dB]');
+set(h, 'FontSize', FontSize);
+set(gca, 'FontSize', FontSize);
+% legend('Nearest','Linear','Cubic','Spline','Rect NUFFT','Knab NUFFT','Knab')
+legend('Nearest','Linear','Cubic','Spline','Knab NUFFT')
+axis([min(x_vec) max(x_vec) -250 0])
 
 figure
-mesh(x_vec,y_vec,20*log10(abs(Reference_reconstruction - rectnufft1D_BP)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Back Projection (with Rect Window & NUFFT)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FFBP_Nearest(:, Np/2))),  'g', 'LineWidth', LineWidth)
+hold on
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FFBP_Linear(:, Np/2))),   'c', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FFBP_Cubic(:, Np/2))),    'r', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FFBP_Spline(:, Np/2))),   'k', 'LineWidth', LineWidth)
+% plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FFBP_RectNFFT(:, Np/2))), 'm', 'LineWidth', LineWidth)
+plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FFBP_KnabNFFT(:, Np/2))), 'b', 'LineWidth', LineWidth)
+% plot(x_vec, 20*log10(abs(Reference_reconstruction(:, Np/2) - Reconstruction_FFBP_Knab(:, Np/2))),     'y', 'LineWidth', LineWidth)
+h=title('FBP');
+set(h, 'FontSize', FontSize);
+h = xlabel('x [m]');
+set(h, 'FontSize', FontSize);
+h = ylabel('Error [dB]');
+set(h, 'FontSize', FontSize);
+set(gca, 'FontSize', FontSize);
+% legend('Nearest','Linear','Cubic','Spline','Rect NUFFT','Knab NUFFT','Knab')
+legend('Nearest','Linear','Cubic','Spline','Knab NUFFT')
+axis([min(x_vec) max(x_vec) -150 0])
 
-figure
-mesh(x_vec,y_vec,20*log10(abs(Reference_reconstruction - spline1D_BP)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Back Projection (with Spline Interpolation)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(Reference_reconstruction - linear1D_BP)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Back Projection (with Linear Interpolation)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(Reference_reconstruction - cubic1D_BP)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Back Projection (with Cubic Interpolation)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(Reference_reconstruction - nearest1D_BP)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Back Projection (with Nearest Interpolation)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(knabnufft2D_FBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Back Projection (with Knab Window & NUFFT)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(knab2D_FBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Back Projection (with Knab approach in the time domain)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(rectnufft2D_FBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Back Projection (with Rect Window & NUFFT)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(spline2D_FBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Back Projection (with Spline Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(linear2D_FBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Back Projection (with Linear Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(cubic2D_FBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Back Projection (with Cubic Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(nearest2D_FBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Back Projection (with Nearest Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(knabnufft2D_FFBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Factorized Back Projection (with Knab Window & NUFFT)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(knab2D_FFBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Factorized Back Projection (with Knab approach in the time domain)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(rectnufft2D_FFBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Factorized Back Projection (with Rect Window & NUFFT)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(spline2D_FFBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Factorized Back Projection (with Spline Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(linear2D_FFBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Factorized Back Projection (with Linear Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(cubic2D_FFBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Factorized Back Projection (with Cubic Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
-
-figure
-mesh(x_vec,y_vec,20*log10(abs(nearest2D_FFBP - Reference_reconstruction)));
-axis ([min(x_vec),max(x_vec),min(y_vec),max(y_vec),-350,0], 'normal');
-h=get(gcf,'CurrentAxes');
-set(h,'FontSize',22);
-h=title('Absolute Error [dB] - Fast Factorized Back Projection (with Nearest Interpolation 2D)');
-set(h,'FontSize',28);
-h = xlabel('x (m)');
-set(h,'FontSize',22);
-h = ylabel('y (m)');
-set(h,'FontSize',22);
-colorbar('hide');
-colormap ('hot');
-set(gca,'FontSize',22);
-caxis([-350,0]);
