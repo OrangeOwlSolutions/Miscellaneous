@@ -4,7 +4,7 @@ N=length(data);
 
 %--- Algorithm parameters
 c=2;                                                    % Oversampling factor >=1 (typically 2)
-K=6;                                                    % 2K+1 interpolation samples (N should be >> K)
+K=3;                                                    % 2K+1 interpolation samples (N should be >> K)
 alfa=(2-1/c)*pi-0.01;                                   % Half-size of the support of the interpolation window
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -29,9 +29,9 @@ spectrum_phi=(1/pi)*sinh(alfa*P)./P;
 spectrum_phi((P==0))=alfa/pi;
 spectrum_phi=spectrum_phi/besseli(0,K*alfa);
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% STEP 1: scaling and zero padding %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%
+% STEP 1 %
+%%%%%%%%%%
 
 u=zeros(1,c*N);
 u((c-1)*N/2+1:(c+1)*N/2)=data./phi;
@@ -56,4 +56,3 @@ result=sum(tmp.');
 %         result(kk) = result(kk) + spectrum_phi(kk,m+1)*U(PP+1);
 %     end
 % end
-
