@@ -13,4 +13,4 @@ k=-N/2:N/2-1;
 
 [K,X]=meshgrid(k,x);
 
-result = exp(-j*K.*X)*data.';
+result = exp(-1i*K.*X)*data.';
