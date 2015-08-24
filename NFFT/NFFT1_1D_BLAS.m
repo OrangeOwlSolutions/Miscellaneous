@@ -2,9 +2,10 @@ function result = NFFT1_1D_BLAS(data, x)
 
 % --- Calculates
 
-% \sum_{n} d_n * exp(-j * k * x_n)
+% \sum_{k} d_k * exp(-j * k * x_l)
 
-% where x_n are random points, d_n are the data and k = -N / 2 : N / 2 - 1
+% where x_l are random output sampling locations, d_k are the data and k = -N / 2 : N /
+% 2 - 1 and the input sampling locations
 
 N=length(data);
 
