@@ -46,11 +46,11 @@ for s=-M:M-1
             pp=sqrt(K.^2-(c*x(l)-s).^2);
             phi_cap=(1/pi)*sinh(alfa*pp)./pp;
             if pp==0 phi_cap=alfa/pi; end
-        elseif (abs(round(2*x(l))+c*M-s)<=K)
+        elseif (abs(round(c*x(l))+c*M-s)<=K)
             pp=sqrt(K.^2-(c*x(l)-s+c*M).^2);
             phi_cap=(1/pi)*sinh(alfa*pp)./pp;
             if pp==0 phi_cap=alfa/pi; end
-        elseif (abs(round(2*x(l))-c*M-s)<=K)
+        elseif (abs(round(c*x(l))-c*M-s)<=K)
             pp=sqrt(K.^2-(c*x(l)-s-c*M).^2);
             phi_cap=(1/pi)*sinh(alfa*pp)./pp;
             if pp==0 phi_cap=alfa/pi; end
