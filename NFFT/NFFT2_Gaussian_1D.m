@@ -39,9 +39,9 @@ for s=-M:M-1
         phi_cap=0;
         if (abs(round(c*x(l))-s)<=K)
             phi_cap = exp( -(c * x(l) - s) .^ 2 / (4 * b)) / (2 * sqrt(b * pi));
-        elseif (abs(round(2*x(l))+c*M-s)<=K)
+        elseif (abs(round(c*x(l))+c*M-s)<=K)
             phi_cap = exp( -(c * x(l) - s + c * M) .^ 2 / (4 * b)) / (2 * sqrt(b * pi));
-        elseif (abs(round(2*x(l))-c*M-s)<=K)
+        elseif (abs(round(c*x(l))-c*M-s)<=K)
             phi_cap = exp( -(c * x(l) - s - c * M) .^ 2 / (4 * b)) / (2 * sqrt(b * pi));
         end
         u(s+M+1)=u(s+M+1)+data(l)*phi_cap;
