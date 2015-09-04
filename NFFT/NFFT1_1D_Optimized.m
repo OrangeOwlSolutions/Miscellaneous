@@ -20,7 +20,6 @@ xi=2*pi*kk/(c*N);
 % Space_Bandwidth_Product=0.991525423728813*((2*pi-pi/c)*K);
 Space_Bandwidth_Product=(1*(2*pi-pi/c)*K);
 [PSWFs P V_even V_odd K_Leg] = S0n(Space_Bandwidth_Product, 12, xi / (2 * pi - pi / c), 1e-30);
-K_Leg
 PSWFs = PSWFs.';
 
 load Result_c_2_NumLegPol_12_K_3_SBPfactor_1.mat
