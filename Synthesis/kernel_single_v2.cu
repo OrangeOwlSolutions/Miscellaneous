@@ -104,11 +104,60 @@ extern double *d_ZERNIKE				= NULL;
 extern double *d_Internal_Coverage		= NULL;
 extern double *d_External_Coverage		= NULL;
 
+extern float  *h_U_discrete_f			= NULL;
+extern float  *h_V_discrete_f			= NULL;
+extern float  *h_Filter_f				= NULL;
+extern float  *h_LEG_f					= NULL;
+extern float  *h_ZERNIKE_f				= NULL;
+extern float  *h_Internal_Coverage_f	= NULL;
+extern float  *h_External_Coverage_f	= NULL;
+extern double *h_U_discrete				= NULL;
+extern double *h_V_discrete				= NULL;
+extern double *h_Filter					= NULL;
+extern double *h_LEG					= NULL;
+extern double *h_ZERNIKE				= NULL;
+extern double *h_Internal_Coverage		= NULL;
+extern double *h_External_Coverage		= NULL;
+
 #define DEBUG
 
 /********/
 /* MAIN */
 /********/
+//int main()
+//{
+//	cublasSafeCall(cublasCreate(&cublasHandleSynthesis));
+//	
+//	// --- Defining spectral quantities
+//	thrust::pair<thrust::pair<float *, float *>, float *> d_SpectralTuple = defineSpectralQuantities((float)u_max, (float)v_max, (float)a_prime_f, (float)b_prime_f, (float)beta, &Nu, &Nv);
+//	thrust::pair<float *, float *> d_UV_discrete = d_SpectralTuple.first;
+//	d_U_discrete_f = d_UV_discrete.first;
+//	d_V_discrete_f = d_UV_discrete.second;
+//	d_Filter_f	   = d_SpectralTuple.second;
+//
+//	// --- Generating the (csi, eta) grid and the Legendre polynomials
+//	thrust::pair<thrust::pair<float *, float *>, float *> d_LegendreTuple = generateLegendreFactorized<float>(Num_unknowns_x, Num_unknowns_y, M_x, M_y);
+//	thrust::pair<float *, float *> d_CSI_ETA = d_LegendreTuple.first;
+//	float *d_CSI = d_CSI_ETA.first;
+//	float *d_ETA = d_CSI_ETA.second;
+//	d_LEG_f = d_LegendreTuple.second;
+//	
+//	// --- Generating the Zernike polynomials
+//	d_ZERNIKE_f = generateZernikep(d_CSI, d_ETA, Num_unknowns_phases, M_x, M_y);
+//	
+//	// --- Loading the masks
+//	d_Internal_Coverage_f = loadGPUrealtxt("/home/angelo/cuda-workspace/ParticleSwarmSynthesis/Release/Internal_Coverage.txt", d_Internal_Coverage_f, (2 * Nu) * (2 * Nv));
+//	d_External_Coverage_f = loadGPUrealtxt("/home/angelo/cuda-workspace/ParticleSwarmSynthesis/Release/External_Coverage.txt", d_External_Coverage_f, (2 * Nu) * (2 * Nv));
+//
+//	/**********************/
+//	/* PSO INITIALIZATION */
+//	/**********************/
+//	h_PSO_Initialize();
+//	h_PSO_Optimize();
+//
+//	return 0;
+//}
+
 int main()
 {
 	cublasSafeCall(cublasCreate(&cublasHandleSynthesis));
@@ -120,6 +169,12 @@ int main()
 	d_V_discrete_f = d_UV_discrete.second;
 	d_Filter_f	   = d_SpectralTuple.second;
 
+	thrust::pair<thrust::pair<float *, float *>, float *> h_SpectralTuple = h_defineSpectralQuantities((float)u_max, (float)v_max, (float)a_prime_f, (float)b_prime_f, (float)beta, &Nu, &Nv);
+	thrust::pair<float *, float *> h_UV_discrete = h_SpectralTuple.first;
+	h_U_discrete_f = h_UV_discrete.first;
+	h_V_discrete_f = h_UV_discrete.second;
+	h_Filter_f	   = h_SpectralTuple.second;
+
 	// --- Generating the (csi, eta) grid and the Legendre polynomials
 	thrust::pair<thrust::pair<float *, float *>, float *> d_LegendreTuple = generateLegendreFactorized<float>(Num_unknowns_x, Num_unknowns_y, M_x, M_y);
 	thrust::pair<float *, float *> d_CSI_ETA = d_LegendreTuple.first;
@@ -127,18 +182,30 @@ int main()
 	float *d_ETA = d_CSI_ETA.second;
 	d_LEG_f = d_LegendreTuple.second;
 	
+	thrust::pair<thrust::pair<float *, float *>, float *> h_LegendreTuple = h_generateLegendreFactorized<float>(Num_unknowns_x, Num_unknowns_y, M_x, M_y);
+	thrust::pair<float *, float *> h_CSI_ETA = h_LegendreTuple.first;
+	float *h_CSI = h_CSI_ETA.first;
+	float *h_ETA = h_CSI_ETA.second;
+	h_LEG_f = h_LegendreTuple.second;
+
 	// --- Generating the Zernike polynomials
 	d_ZERNIKE_f = generateZernikep(d_CSI, d_ETA, Num_unknowns_phases, M_x, M_y);
 	
-	// --- Loading the masks
-	d_Internal_Coverage_f = loadGPUrealtxt("/home/angelo/cuda-workspace/ParticleSwarmSynthesis/Release/Internal_Coverage.txt", d_Internal_Coverage_f, (2 * Nu) * (2 * Nv));
-	d_External_Coverage_f = loadGPUrealtxt("/home/angelo/cuda-workspace/ParticleSwarmSynthesis/Release/External_Coverage.txt", d_External_Coverage_f, (2 * Nu) * (2 * Nv));
+	h_ZERNIKE_f = h_generateZernikep(h_CSI, h_ETA, Num_unknowns_phases, M_x, M_y);
 
-	/**********************/
-	/* PSO INITIALIZATION */
-	/**********************/
-	h_PSO_Initialize();
-	h_PSO_Optimize();
+	//saveGPUrealtxt(d_ZERNIKE_f, "C:\\Users\\angelo\\Documents\\CEM\\ParticleSwarm\\ParticleSwarmSynthesis\\ParticleSwarmSynthesisMatlab\\d_ZERNIKE_f.txt", Num_unknowns_phases * M_x * M_y);
+	//
+	//saveCPUrealtxt(h_ZERNIKE_f, "C:\\Users\\angelo\\Documents\\CEM\\ParticleSwarm\\ParticleSwarmSynthesis\\ParticleSwarmSynthesisMatlab\\h_ZERNIKE_f.txt", Num_unknowns_phases * M_x * M_y);
+
+	//// --- Loading the masks
+	//d_Internal_Coverage_f = loadGPUrealtxt("/home/angelo/cuda-workspace/ParticleSwarmSynthesis/Release/Internal_Coverage.txt", d_Internal_Coverage_f, (2 * Nu) * (2 * Nv));
+	//d_External_Coverage_f = loadGPUrealtxt("/home/angelo/cuda-workspace/ParticleSwarmSynthesis/Release/External_Coverage.txt", d_External_Coverage_f, (2 * Nu) * (2 * Nv));
+
+	///**********************/
+	///* PSO INITIALIZATION */
+	///**********************/
+	//h_PSO_Initialize();
+	//h_PSO_Optimize();
 
 	return 0;
 }
