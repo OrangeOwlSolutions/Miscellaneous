@@ -4,6 +4,9 @@
 template <class T>
 thrust::pair<thrust::pair<T *, T*>, T*> defineSpectralQuantities(const T, const T, const T, const T, const T, int *, int *);
 
+template <class T>
+thrust::pair<thrust::pair<T *, T*>, T*> h_defineSpectralQuantities(const T, const T, const T, const T, const T, int *, int *);
+
 void calculateApertureField(const float  * __restrict__, const float  * __restrict__, const float  * __restrict__,
 											 const float  * __restrict__, float2_  * __restrict__, const float , const float , const float ,
 											 const float , const int);
