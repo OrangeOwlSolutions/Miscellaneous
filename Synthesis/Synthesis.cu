@@ -62,9 +62,9 @@ extern double *d_ZERNIKE;
 extern double *d_Internal_Coverage;
 extern double *d_External_Coverage;
 
-/********************************/
-/* DEFINING SPECTRAL QUANTITIES */
-/********************************/
+/**************************************/
+/* DEFINING SPECTRAL QUANTITIES - GPU */
+/**************************************/
 #define BLOCKSIZE_FILTER	256
 
 template <class T>
@@ -122,6 +122,52 @@ thrust::pair<thrust::pair<T *, T*>, T*> defineSpectralQuantities(const T uMax, c
 
 template thrust::pair<thrust::pair<float  *, float  *>, float  *> defineSpectralQuantities(const float  uMax, const float  vMax, const float  aPrime, const float  bPrime, const float  beta, int *, int *);
 template thrust::pair<thrust::pair<double *, double *>, double *> defineSpectralQuantities(const double uMax, const double vMax, const double aPrime, const double bPrime, const double beta, int *, int *);
+
+/**************************************/
+/* DEFINING SPECTRAL QUANTITIES - CPU */
+/**************************************/
+template <class T>
+thrust::pair<thrust::pair<T *, T*>, T*> h_defineSpectralQuantities(const T uMax, const T vMax, const T aPrime, const T bPrime, const T beta, int *Nu, int *Nv) {
+
+	Nu[0] = (int)(uMax / (pi / aPrime)) + 1;
+	Nv[0] = (int)(vMax / (pi / bPrime)) + 1;
+
+	T *h_u_discrete = h_colon(-static_cast<T>(Nu[0]), static_cast<T>(1), static_cast<T>(Nu[0] - 1));
+	T *h_v_discrete = h_colon(-static_cast<T>(Nv[0]), static_cast<T>(1), static_cast<T>(Nu[0] - 1));
+
+	thrust::pair<T *, T *> h_UV_discrete = h_meshgrid(h_u_discrete, 2 * Nu[0], h_v_discrete, 2 * Nv[0]);
+	T *h_U_discrete = h_UV_discrete.first;
+	T *h_V_discrete = h_UV_discrete.second;
+
+	T *h_u = (T *)malloc((2 * Nu[0]) * sizeof(T));
+	T *h_v = (T *)malloc((2 * Nv[0]) * sizeof(T));
+
+	memcpy(h_u, h_u_discrete, (2 * Nu[0]) * sizeof(T));
+	memcpy(h_v, h_v_discrete, (2 * Nv[0]) * sizeof(T));
+	
+	h_vectorMulConstant(h_u, static_cast<T>(pi / aPrime), (2 * Nu[0]));
+	h_vectorMulConstant(h_v, static_cast<T>(pi / bPrime), (2 * Nv[0]));
+
+	thrust::pair<T *, T *> h_UV = h_meshgrid(h_u, 2 * Nu[0], h_v, 2 * Nv[0]);
+	T *h_U = h_UV.first;
+	T *h_V = h_UV.second;
+
+	T * h_Filter = (T *)malloc((2 * Nu[0]) * (2 * Nv[0]) * sizeof(T));
+	for (int i = 0; i < (2 * Nu[0]) * (2 * Nv[0]); i++) h_Filter[i] = static_cast<T>((h_U[i] * h_U[i] + h_V[i] * h_V[i]) <= beta * beta);
+
+	free(h_u_discrete);
+	free(h_v_discrete);
+	free(h_u);
+	free(h_v);
+	free(h_U);
+	free(h_V);
+
+	return thrust::make_pair(thrust::make_pair(h_U_discrete, h_V_discrete), h_Filter);
+
+}
+
+template thrust::pair<thrust::pair<float  *, float  *>, float  *> h_defineSpectralQuantities(const float  uMax, const float  vMax, const float  aPrime, const float  bPrime, const float  beta, int *, int *);
+template thrust::pair<thrust::pair<double *, double *>, double *> h_defineSpectralQuantities(const double uMax, const double vMax, const double aPrime, const double bPrime, const double beta, int *, int *);
 
 /*****************************************************************************************/
 /* FUNCTIONS TO CALCULATE THE APERTURE FIELD OVER THE REFLECTARRAY SURFACE - DOUBLE CASE */
