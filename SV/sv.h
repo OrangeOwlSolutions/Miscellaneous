@@ -27,7 +27,6 @@ struct svdPlan {
 /*********************/
 template<class T>
 void createPlan(svdPlan<T>& plan, unsigned int Nrows, unsigned int Ncols, unsigned int numMatrices, unsigned int gpuID) {
-//void createPlan(svdPlan<T>& plan, unsigned int Nrows, unsigned int Ncols, unsigned int numMatrices) {
 
     // --- Device allocations
     gpuErrchk(cudaSetDevice(gpuID));
@@ -64,39 +63,34 @@ void destroyPlan(svdPlan<real_type>& plan, unsigned int gpuID) {
 #ifdef TEMPLATE
 template<class T, const unsigned int numMatrices, const unsigned int Nrows, const unsigned int Ncols, const int blockSizeBidiagonalize,
          const int blockSizeExtractDiagonals, const int blockSizeRearrange, const int blockSizeSturm>
-//void my_svd(svdPlan<T> &plan, T *inputMatrices, T *singularValues, double &rearrangeTime, double &bidiagonalizationTime,
-//	        double &tridiagAndBisectionTime, double &hostToDeviceTime, const T tol) {
 void my_svd(svdPlan<T> *plan, T *inputMatrices, double &rearrangeTime, double &bidiagonalizationTime,
 	        double &tridiagAndBisectionTime, double &hostToDeviceTime, const T tol) {
 #else
 template<class T, const int blockSizeSturm>
-//void my_svd(svdPlan<T> &plan, T *inputMatrices, T *singularValues, double &rearrangeTime, double &bidiagonalizationTime,
-//	        double &tridiagAndBisectionTime, double &hostToDeviceTime, const unsigned int numMatrices, const unsigned int Nrows,
-//			const unsigned int Ncols, const T tol, const int blockSizeBidiagonalize, const int blockSizeExtractDiagonals, const int blockSizeRearrange) {
 void my_svd(svdPlan<T> *plan, T *inputMatrices, double &rearrangeTime, double &bidiagonalizationTime,
 	        double &tridiagAndBisectionTime, double &hostToDeviceTime, const unsigned int numMatrices, const unsigned int Nrows,
 			const unsigned int Ncols, const T tol, const int blockSizeBidiagonalize, const int blockSizeExtractDiagonals, const int blockSizeRearrange) {
 #endif
 
 #ifdef DEBUG
-	TimingGPU timerGPU;
+	TimingCPU timer;
 #endif
 
 	// --- Host -> Device memory transfers
 #ifdef DEBUG
-	timerGPU.StartCounter();
+	timer.StartCounter();
 #endif
 	for (int k = 0; k < numGPUs; k++) {
 		gpuErrchk(cudaSetDevice(k));
 		gpuErrchk(cudaMemcpyAsync(plan[k].dev_mat, inputMatrices + k * Nrows * Ncols * numMatrices, Nrows * Ncols * numMatrices * sizeof(T), cudaMemcpyHostToDevice));
 	}
 #ifdef DEBUG
-	hostToDeviceTime	+= timerGPU.GetCounter();
+	hostToDeviceTime	+= timer.GetCounter();
 #endif
 
 	// --- Reorganize the input matrix
 #ifdef DEBUG
-	timerGPU.StartCounter();
+	timer.StartCounter();
 #endif
 #ifdef TEMPLATE
 	for (int k = 0; k < numGPUs; k++) {
@@ -110,12 +104,12 @@ void my_svd(svdPlan<T> *plan, T *inputMatrices, double &rearrangeTime, double &b
 	}
 #endif
 #ifdef DEBUG
-	rearrangeTime	+= timerGPU.GetCounter();
+	rearrangeTime	+= timer.GetCounter();
 #endif
 
 	// --- Compute bidiagonalization
 #ifdef DEBUG
-	timerGPU.StartCounter();
+	timer.StartCounter();
 #endif
 #ifdef TEMPLATE
 	for (int k = 0; k < numGPUs; k++) {
@@ -129,12 +123,12 @@ void my_svd(svdPlan<T> *plan, T *inputMatrices, double &rearrangeTime, double &b
 	}
 #endif
 #ifdef DEBUG
-	bidiagonalizationTime += timerGPU.GetCounter();
+	bidiagonalizationTime += timer.GetCounter();
 #endif
 
 	// --- Compute tridiagonal matrix and find eigenvalues
 #ifdef DEBUG
-	timerGPU.StartCounter();
+	timer.StartCounter();
 #endif
 #ifdef TEMPLATE
 	for (int k = 0; k < numGPUs; k++) {
@@ -148,7 +142,7 @@ void my_svd(svdPlan<T> *plan, T *inputMatrices, double &rearrangeTime, double &b
 	}
 #endif
 #ifdef DEBUG
-	tridiagAndBisectionTime	+= timerGPU.GetCounter();
+	tridiagAndBisectionTime	+= timer.GetCounter();
 #endif
 
 }
