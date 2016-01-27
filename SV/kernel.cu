@@ -12,6 +12,7 @@
 
 #include "Utilities.cuh"
 #include "InputOutput.cuh"
+#include "TimingCPU.h"
 #include "TimingGPU.cuh"
 
 #define real_bool	1				// --- 1 is for double, 0 for float
@@ -38,7 +39,9 @@ int main() {
 
 	const real		   tol				= 0.0000001;
 
-    const int blockSizeBidiagonalize	= 128;
+	const unsigned int numExecutions 	= 1;
+
+	const int blockSizeBidiagonalize	= 128;
     const int blockSizeExtractDiagonals	= 128;
     const int blockSizeRearrange		= 128;
     const int blockSizeSturm			= 32;
@@ -46,7 +49,8 @@ int main() {
     srand(time(NULL));
 
 #ifdef DEBUG
-	TimingGPU timerGPU;
+//	TimingGPU timerGPU;
+	TimingCPU timerGPU;
 
 	double	rearrangeTime				= 0.,
 			bidiagonalizationTime		= 0.,
@@ -68,7 +72,6 @@ int main() {
     svdPlan<real> plan[numGPUs];
     for (int k = 0; k < numGPUs; k++) createPlan(plan[k], Nrows, Ncols, numMatrices, k);
 
-	const unsigned int numExecutions = 1;
     for (unsigned k = 0; k < numExecutions; k++) {
 
         // --- Generate random matrices
