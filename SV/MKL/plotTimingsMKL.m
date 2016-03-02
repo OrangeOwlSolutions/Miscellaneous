@@ -2,7 +2,8 @@ clear all
 close all
 clc
 
-load timings.txt
+load Timing_Double.txt
+timings = Timing_Double;
 
 kk = 2.^(4 : 20);
 mm = 2 : 8;
