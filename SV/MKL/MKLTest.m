@@ -7,9 +7,11 @@ load U.txt
 load V.txt
 load S.txt
 
-Source_Matrix = reshape(Source_Matrix, 3, 3);
-U             = reshape(U, 3, 3);
-V             = reshape(V, 3, 3);
+Nrows = 8;
+Ncols = 8;
+Source_Matrix = reshape(Source_Matrix, Nrows, Ncols);
+U             = reshape(U, Nrows, Ncols);
+V             = reshape(V, Nrows, Ncols);
 
 [UU, SS, VV]  = svd(Source_Matrix);
 
