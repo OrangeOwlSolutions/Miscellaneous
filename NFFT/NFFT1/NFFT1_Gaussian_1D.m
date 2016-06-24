@@ -4,7 +4,6 @@ N=length(data);
 
 %--- Algorithm parameters
 % b = log(10^(0.135));
-c = 2;                                                  % Oversampling factor >=1 (typically 2)
 % K = fix(2 * b * pi);                                    % 2K+1 interpolation samples (N should be >> K) (parameter q/2 in D&R page 1380)
 b = K / (2 * pi);
 
