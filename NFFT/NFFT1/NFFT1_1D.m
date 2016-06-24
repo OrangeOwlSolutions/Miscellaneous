@@ -1,10 +1,8 @@
-function result=NFFT1_1D(data,x)
+function result = NFFT1_1D(data, x, c, K)
 
 N=length(data);
 
 %--- Algorithm parameters
-c=2;                                                    % Oversampling factor >=1 (typically 2)
-K=3;                                                    % 2K+1 interpolation samples (N should be >> K)
 alfa=(2-1/c)*pi-0.01;                                   % Half-size of the support of the interpolation window
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
