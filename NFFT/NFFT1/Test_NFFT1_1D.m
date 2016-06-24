@@ -23,7 +23,7 @@ end
 a = 20 * lambda;
 
 % --- Number of (even) radiators
-N = ceil(2 * a / (lambda / 10));
+N = ceil(2 * a / (lambda / 2));
 if (mod(N, 2) ~= 0) N = N + 1; end
 
 % --- Aperture discretization
@@ -31,8 +31,9 @@ x = -N / 2 : (N / 2 - 1);
 
 Num_tests = 100;
 
-rms_Opt_NFFT = zeros(1, Num_tests);
-rms_NFFT     = zeros(1, Num_tests);
+rms_Opt_NFFT        = zeros(1, Num_tests);
+rms_NFFT            = zeros(1, Num_tests);
+rms_Gaussian_NFFT   = zeros(1, Num_tests);
 for tt = 1 : Num_tests,
 
     % --- Output spectral points
