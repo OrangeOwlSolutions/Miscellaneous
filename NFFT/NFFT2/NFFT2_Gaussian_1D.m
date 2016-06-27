@@ -1,11 +1,15 @@
-function result=NFFT2_Gaussian_1D(data, x, M)
+function result=NFFT2_Gaussian_1D(data, x, M, c, K)
 
 N = length(data);
 
 %--- Algorithm parameters
-b = log(10^(0.135));
-c = 2;                                                  % Oversampling factor >=1 (typically 2)
-K = fix(2 * b * pi);                                    % 2K+1 interpolation samples (N should be >> K) (parameter q/2 in Dutt & Rokhlin)
+alfa=(2-1/c)*pi-0.01;                                   % Half-size of the support of the interpolation window
+
+%--- Algorithm parameters
+% b = log(10^(0.135));
+% c = 2;                                                  % Oversampling factor >=1 (typically 2)
+% K = fix(2 * b * pi);                                    % 2K+1 interpolation samples (N should be >> K) (parameter q/2 in Dutt & Rokhlin)
+b = K / (2 * pi);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONSTRUCTING THE SPECTRAL WINDOW %
@@ -33,8 +37,8 @@ phi = exp(-b * xi .^ 2);
 % end
 
 % --- New version
-u=zeros(1,c*M);
-for s=-M:M-1
+u = zeros(1, c * M);
+for s=-c*M/2:c*M/2-1
     for l=1:N
         phi_cap=0;
         if (abs(round(c*x(l))-s)<=K)
@@ -44,7 +48,7 @@ for s=-M:M-1
         elseif (abs(round(c*x(l))-c*M-s)<=K)
             phi_cap = exp( -(c * x(l) - s - c * M) .^ 2 / (4 * b)) / (2 * sqrt(b * pi));
         end
-        u(s+M+1)=u(s+M+1)+data(l)*phi_cap;
+        u(s+c*M/2+1)=u(s+c*M/2+1)+data(l)*phi_cap;
     end
 end
 
