@@ -1,4 +1,4 @@
-function result = NFFT3_1D_Optimized(data, x, s)
+function result = NFFT3_1D_Opt(data, x, s)
 
 xsi_max = pi;
 N = length(data);
