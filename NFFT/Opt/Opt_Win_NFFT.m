@@ -7,7 +7,7 @@ global mm K EXP_REF PFs xsi xsi_full x indices_xsi XSI MM P K_Leg V_even alfa_pr
 %%%%%%%%%%%%%%
 % PARAMETERS %
 %%%%%%%%%%%%%%
-c = 2;                                                  % --- Oversampling factor
+c = 1.5;                                                  % --- Oversampling factor
 alfa_prime = ((2 - 1 / c) * pi);                        % --- Support of Phi
 
 K = 6;                                                  % --- Support of Phi_hat
@@ -40,7 +40,7 @@ EXP_REF     = exp(-1i * XSI2 .* X);
 % PFs %
 %%%%%%%
 % SB_Product=0.991525423728813*((2*pi-pi/c)*K);
-SBP_factor                      = 1.2;
+SBP_factor                      = 1.1;
 SB_Product                      = SBP_factor * ((2 * pi - pi / c) * K);
 Max_Num_PFs                     = ceil(2 * SB_Product / pi);                          % --- Maximum number of PFs
 [PFs P V_even V_odd K_Leg]      = S0n(SB_Product, 2 * Max_Num_PFs, xsi_full / (2 * pi - pi / c), 1e-30);
@@ -113,5 +113,7 @@ plot(xsi_full / (2 * pi - 1 * pi / c), abs(Phi) / max(abs(Phi)), 'LineWidth', 2)
 hold off
 xlabel('\xi / (2\pi-\pi/c)')
 ylabel('\phi(\xi)')
+
+
 
 
