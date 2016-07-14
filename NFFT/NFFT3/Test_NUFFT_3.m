@@ -7,17 +7,19 @@ close all
 lambda = 1;
 beta = 2 * pi / lambda;
 
-c = 1.5;                                                      % --- Oversampling factor >=1 (typically 2)
+c = 2;                                                      % --- Oversampling factor >=1 (typically 2)
 K = 6;                                                      % --- 2K+1 interpolation samples (N should be >> K)
 
-Tab = [2 3 1.3; 2 6 1.11; 1.5 3 1.15; 1.5 6 1.15];
+Tab = [2 3 1.2; 2 6 1.1; 1.5 3 1.5; 1.5 6 1.1];
 
-Max_Num_PFs = 12;                                           % --- Maximum number of PFs
 for k = 1 : 4,
     if ((c == Tab(k, 1)) && (K == Tab(k, 2)))
         SBP_factor = Tab(k, 3);
     end
 end
+
+SB_Product                      = SBP_factor * ((2 * pi - pi / c) * K);
+Max_Num_PFs                     = ceil(2 * SB_Product / pi);                          % --- Maximum number of PFs
 
 % --- Half-size
 a = 20 * lambda;
