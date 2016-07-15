@@ -35,6 +35,11 @@ Num_tests = 100;
 rms_Opt_NFFT        = zeros(1, Num_tests);
 rms_NFFT            = zeros(1, Num_tests);
 rms_Gaussian_NFFT   = zeros(1, Num_tests);
+
+err_Opt_NFFT        = zeros(1, Num_tests);
+err_NFFT            = zeros(1, Num_tests);
+err_Gaussian_NFFT   = zeros(1, Num_tests);
+
 for tt = 1 : Num_tests,
 
     % --- Output spectral points
@@ -53,6 +58,10 @@ for tt = 1 : Num_tests,
     rms_Gaussian_NFFT(tt)           = 100*sqrt(sum(abs(result_Gaussian_NFFT_Matlab  - result_NFFT_BLAS.') .^2 ) / sum(abs(result_NFFT_BLAS) .^ 2));
     rms_Opt_NFFT(tt)                = 100*sqrt(sum(abs(result_Opt_NFFT_Matlab       - result_NFFT_BLAS.') .^ 2) / sum(abs(result_NFFT_BLAS) .^ 2));
     
+    err_NFFT(tt)                    = max(abs(result_NFFT_Matlab           - result_NFFT_BLAS.'));
+    err_Gaussian_NFFT(tt)           = max(abs(result_Gaussian_NFFT_Matlab  - result_NFFT_BLAS.'));
+    err_Opt_NFFT(tt)                = max(abs(result_Opt_NFFT_Matlab       - result_NFFT_BLAS.'));
+
     tt / Num_tests
 
 end
@@ -60,6 +69,10 @@ end
 mean(rms_NFFT)
 mean(rms_Gaussian_NFFT)
 mean(rms_Opt_NFFT)
+
+max(err_NFFT)
+max(err_Gaussian_NFFT)
+max(err_Opt_NFFT)
 
 figure(1)
 semilogy(rms_NFFT,'LineWidth',2)
@@ -74,5 +87,4 @@ legend('Kaiser-Bessel','Optimized','Gaussian')
 % —- For drawings only
 set(gca,'FontSize',13)
 set(findall(gcf,'type','text'),'FontSize',13)
-
 
