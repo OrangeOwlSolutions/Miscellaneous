@@ -37,6 +37,10 @@ rms_Opt_NFFT        = zeros(1, Num_tests);
 rms_NFFT            = zeros(1, Num_tests);
 rms_Gaussian_NFFT   = zeros(1, Num_tests);
 
+err_Opt_NFFT        = zeros(1, Num_tests);
+err_NFFT            = zeros(1, Num_tests);
+err_Gaussian_NFFT   = zeros(1, Num_tests);
+
 for tt = 1 : Num_tests,
 
     % --- Array element locations
@@ -52,12 +56,16 @@ for tt = 1 : Num_tests,
     result_NFFT_BLAS                = NFFT3_1D_BLAS(data, x, u);
     result_NFFT_Matlab              = NFFT3_1D(data, x, u, c, K);
     result_Gaussian_NFFT_Matlab     = NFFT3_Gaussian_1D(data, x, u, c, K);
-    result_Opt_NUFFT_Matlab         = NFFT3_1D_Opt(data, x, u, c, K, Max_Num_PFs, SBP_factor);
+    result_Opt_NFFT_Matlab         = NFFT3_1D_Opt(data, x, u, c, K, Max_Num_PFs, SBP_factor);
 
     rms_NFFT(tt)                    = 100*sqrt(sum(abs(result_NFFT_Matlab           - result_NFFT_BLAS) .^2 ) / sum(abs(result_NFFT_BLAS) .^ 2));
     rms_Gaussian_NFFT(tt)           = 100*sqrt(sum(abs(result_Gaussian_NFFT_Matlab  - result_NFFT_BLAS) .^2 ) / sum(abs(result_NFFT_BLAS) .^ 2));
-    rms_Opt_NFFT(tt)                = 100*sqrt(sum(abs(result_Opt_NUFFT_Matlab - result_NFFT_BLAS) .^ 2) / sum(abs(result_NFFT_BLAS) .^ 2));
+    rms_Opt_NFFT(tt)                = 100*sqrt(sum(abs(result_Opt_NFFT_Matlab - result_NFFT_BLAS) .^ 2) / sum(abs(result_NFFT_BLAS) .^ 2));
     
+    err_NFFT(tt)                    = max(abs(result_NFFT_Matlab           - result_NFFT_BLAS));
+    err_Gaussian_NFFT(tt)           = max(abs(result_Gaussian_NFFT_Matlab  - result_NFFT_BLAS));
+    err_Opt_NFFT(tt)                = max(abs(result_Opt_NFFT_Matlab       - result_NFFT_BLAS));
+
     tt / Num_tests
 
 end
@@ -65,6 +73,10 @@ end
 mean(rms_NFFT)
 mean(rms_Gaussian_NFFT)
 mean(rms_Opt_NFFT)
+
+max(err_NFFT)
+max(err_Gaussian_NFFT)
+max(err_Opt_NFFT)
 
 figure(1)
 semilogy(rms_NFFT,'LineWidth',2)
