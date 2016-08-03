@@ -22,17 +22,20 @@ SB_Product                      = SBP_factor * ((2 * pi - pi / c) * K);
 Max_Num_PFs                     = ceil(2 * SB_Product / pi);                          % --- Maximum number of PFs
 
 % --- Number of (even) array elements
-% N = 20;
-N = 14;
+% N = 14;
+N = 34;
 
 % --- Output spectral points
 M = 20 * N;
 u = 2 * beta * (-M / 2 : (M / 2 - 1)) / M;
 
 % --- Array element locations
-% x = [0.139 0.649 0.979 1.501 1.934 2.576 3.261] * lambda;
-x = [0.25 0.75 1.25 1.75 2.25 2.75 3.25] * lambda;
-x = [-x x];
+% % x = [0.139 0.649 0.979 1.501 1.934 2.576 3.261] * lambda;
+% x = [0.25 0.75 1.25 1.75 2.25 2.75 3.25] * lambda;
+% x = [-x x];
+
+load positions.mat
+x = x - 0.5 * (min(x) + max(x));
 
 data = ones(size(x));
 
@@ -47,42 +50,53 @@ rms_Opt_NFFT                    = 100*sqrt(sum(abs(result_Opt_NUFFT_Matlab      
 
 
 figure(1)
-plot(u/beta,20*log10(abs(result_NFFT_BLAS)),'LineWidth',2)
+plot(u/beta,20*log10(abs(result_NFFT_BLAS)/max(abs(result_NFFT_BLAS))),'LineWidth',2)
 hold on
-plot(u/beta,20*log10(abs(result_NFFT_Matlab)),'r-.','LineWidth',2)
+plot(u/beta,20*log10(abs(result_NFFT_Matlab)/max(abs(result_NFFT_BLAS))),'r-.','LineWidth',2)
 hold off
-axis([-1 1 -15 25])
+axis([-1 1 -50 1])
 xlabel('u/\beta')
-ylabel('20log_{10}(f)')
+ylabel('Power pattern [dB]')
 legend('Exact','Kaiser-Bessel')
 title('Kaiser-Bessel')
 set(gca,'FontSize',13)
 set(findall(gcf,'type','text'),'FontSize',13)
 
 figure(2)
-plot(u/beta,20*log10(abs(result_NFFT_BLAS)),'LineWidth',2)
+plot(u/beta,20*log10(abs(result_NFFT_BLAS)/max(abs(result_NFFT_BLAS))),'LineWidth',2)
 hold on
-plot(u/beta,20*log10(abs(result_Gaussian_NFFT_Matlab)),'r-.','LineWidth',2)
+plot(u/beta,20*log10(abs(result_Gaussian_NFFT_Matlab)/max(abs(result_NFFT_BLAS))),'r-.','LineWidth',2)
 hold off
-axis([-1 1 -15 25])
+axis([-1 1 -50 1])
 xlabel('u/\beta')
-ylabel('20log_{10}(f)')
+ylabel('Power pattern [dB]')
 legend('Exact','Gaussian')
 title('Gaussian')
 set(gca,'FontSize',13)
 set(findall(gcf,'type','text'),'FontSize',13)
 
 figure(3)
-plot(u/beta,20*log10(abs(result_NFFT_BLAS)),'LineWidth',2)
+plot(u/beta,20*log10(abs(result_NFFT_BLAS)/max(abs(result_NFFT_BLAS))),'LineWidth',2)
 hold on
-plot(u/beta,20*log10(abs(result_Opt_NUFFT_Matlab)),'r-.','LineWidth',2)
+plot(u/beta,20*log10(abs(result_Opt_NUFFT_Matlab)/max(abs(result_NFFT_BLAS))),'r-.','LineWidth',2)
 hold off
-axis([-1 1 -15 25])
+axis([-1 1 -50 1])
 xlabel('u/\beta')
-ylabel('20log_{10}(f)')
+ylabel('Power pattern [dB]')
 legend('Exact','Optimized')
 title('Optimized')
 set(gca,'FontSize',13)
 set(findall(gcf,'type','text'),'FontSize',13)
 
-
+figure(4)
+plot(u/beta,20*log10(abs(result_NFFT_BLAS ./ result_Opt_NUFFT_Matlab.')),'LineWidth',2)
+hold on
+plot(u/beta,20*log10(abs(result_NFFT_BLAS ./ result_Gaussian_NFFT_Matlab.')),'r-','LineWidth',2)
+plot(u/beta,20*log10(abs(result_NFFT_BLAS ./ result_NFFT_Matlab.')),'k-','LineWidth',2)
+hold off
+axis([-1 1 -10 10])
+xlabel('u/\beta')
+ylabel('Power pattern difference with exact [dB]')
+legend('Gaussian','Kaiser-Bessel','Optimized')
+set(gca,'FontSize',13)
+set(findall(gcf,'type','text'),'FontSize',13)
