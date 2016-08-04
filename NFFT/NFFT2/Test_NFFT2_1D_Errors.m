@@ -89,10 +89,10 @@ set(gca,'FontSize',13)
 set(findall(gcf,'type','text'),'FontSize',13)
 
 figure(4)
-plot(u/beta,20*log10(abs(result_NFFT_BLAS ./ result_Opt_NUFFT_Matlab.')),'LineWidth',2)
-hold on
 plot(u/beta,20*log10(abs(result_NFFT_BLAS ./ result_Gaussian_NFFT_Matlab.')),'r-','LineWidth',2)
+hold on
 plot(u/beta,20*log10(abs(result_NFFT_BLAS ./ result_NFFT_Matlab.')),'k-','LineWidth',2)
+plot(u/beta,20*log10(abs(result_NFFT_BLAS ./ result_Opt_NUFFT_Matlab.')),'LineWidth',2)
 hold off
 axis([-1 1 -10 10])
 xlabel('u/\beta')
@@ -100,3 +100,4 @@ ylabel('Power pattern difference with exact [dB]')
 legend('Gaussian','Kaiser-Bessel','Optimized')
 set(gca,'FontSize',13)
 set(findall(gcf,'type','text'),'FontSize',13)
+
