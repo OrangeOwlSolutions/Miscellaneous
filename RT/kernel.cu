@@ -6,10 +6,9 @@
 // --- Check that everything runs on 0 gpus.
 // --- Insert timing
 // --- How inserting include directories directly in c++ files, instead as Visual Studio options
-// --- Add diffraction ?
+s// --- Add diffraction ?
 // --- Check the channel capacity. Are the results correct? For 12 tx antennas and 4 rx the result is 500
-// --- It does not work with more Legendre polynomials
-// --- There is no point in using the code for num_TX > num_RX because the matrices must be vertical
+// --- It does not work with more Legendre polynomials// --- There is no point in using the code for num_TX > num_RX because the matrices must be vertical
 //     rectangular. There is a known bug for num_TX = 4 and num_RX = 6 in project_on_curve in the for
 //     loop managing the calculation of legendre coefficients.
 #include <cuda.h>
@@ -19,8 +18,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <vector>
-#include <algorithm>
+#include <vector>#include <algorithm>
 
 #include <thrust\device_vector.h>
 #include <thrust\random\linear_congruential_engine.h>
@@ -30,8 +28,7 @@
 #include "vec3.h"
 #include "setAntennas.h"
 #include "pattern.h"
-#include "utils.h"
-#include "RXTX.h"
+#include "utils.h"#include "RXTX.h"
 #include "load_nbin.h"
 #include "edge.h"
 #include "device_path_finder.h"
@@ -39,7 +36,7 @@
 #include "ray_path.h"
 #include "trace_path.h"
 #include "svd.h"
-//
+
 #include "optimizerAncillary.cuh"
 #include "Scattering_Matrix.cuh"
 #include "svd.cuh"
@@ -49,11 +46,11 @@
 #include "TimingCPU.h"
 #include "TimingGPU.cuh"
 
-//std::string meshFileName		= "D:\\Project\\Breglia\\FindPaths5\\FindPaths4\\plate_and_cylinder_MIMO.nbin";
-std::string meshFileName		= "D:\\Project\\Breglia\\FindPaths5\\FindPaths4\\plate_and_cylinder_rectangular_MIMO.nbin";
-std::string edgeListFileName    = "D:\\Project\\Breglia\\FindPaths5\\FindPaths4\\edge_list_v2.ssv";
-std::string txPatternFileName	= "D:\\Project\\Breglia\\FindPaths5\\FindPaths4\\pattern_completo_simmetrico.pat";
-std::string rxPatternFileName	= "D:\\Project\\Breglia\\FindPaths5\\FindPaths4\\pattern_completo_simmetrico.pat";
+//std::string meshFileName		= "D:\\Project\\FindPaths5\\FindPaths4\\plate_and_cylinder_MIMO.nbin";
+std::string meshFileName		= "D:\\Project\\FindPaths5\\FindPaths4\\plate_and_cylinder_rectangular_MIMO.nbin";
+std::string edgeListFileName    = "D:\\Project\\FindPaths5\\FindPaths4\\edge_list_v2.ssv";
+std::string txPatternFileName	= "D:\\Project\\FindPaths5\\FindPaths4\\pattern_completo_simmetrico.pat";
+std::string rxPatternFileName	= "D:\\Project\\FindPaths5\\FindPaths4\\pattern_completo_simmetrico.pat";
 
 nvmesh mesh;
 bool mesh_loaded = false;
