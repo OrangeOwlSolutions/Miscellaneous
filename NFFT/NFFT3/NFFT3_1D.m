@@ -76,3 +76,4 @@ end
 %%%%%%%%%%%%%
 
 result = NFFT1_1D(u, s * N / (c * S), c, K) ./ phi2;
+
