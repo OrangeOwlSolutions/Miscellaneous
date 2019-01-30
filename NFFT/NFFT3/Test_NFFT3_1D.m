@@ -7,8 +7,8 @@ close all
 lambda = 1;
 beta = 2 * pi / lambda;
 
-c = 2;                                                      % --- Oversampling factor >=1 (typically 2)
-K = 6;                                                      % --- 2K+1 interpolation samples (N should be >> K)
+c = 1.5;                                                      % --- Oversampling factor >=1 (typically 2)
+K = 3;                                                      % --- 2K+1 interpolation samples (N should be >> K)
 
 Tab = [2 3 1.2; 2 6 1.1; 1.5 3 1.5; 1.5 6 1.1];
 
