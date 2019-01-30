@@ -7,7 +7,9 @@ S = max(abs(s));
 %--- Algorithm parameters
 % b = log(10^(0.135));
 % K = fix(2 * b * pi);                                    % 2K+1 interpolation samples (N should be >> K) (parameter q/2 in Dutt & Rokhlin)
-b = K / (2 * pi);
+% b = K / (2 * pi);
+
+b = (2 * c / (2 * c - 1)) * K / (4 * pi);
 
 x1 = S * x / pi;
 
@@ -85,5 +87,8 @@ end
 %%%%%%%%%%%%%
 
 result = NFFT1_Gaussian_1D(u, s * N / (c * S), c, K) ./ phi2;
+
+
+
 
 
