@@ -9,7 +9,9 @@ alfa=(2-1/c)*pi-0.01;                                   % Half-size of the suppo
 % b = log(10^(0.135));
 % c = 2;                                                  % Oversampling factor >=1 (typically 2)
 % K = fix(2 * b * pi);                                    % 2K+1 interpolation samples (N should be >> K) (parameter q/2 in Dutt & Rokhlin)
-b = K / (2 * pi);
+% b = K / (2 * pi);
+
+b = (2 * c / (2 * c - 1)) * K / (4 * pi);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONSTRUCTING THE SPECTRAL WINDOW %
@@ -63,3 +65,4 @@ FFT_Mc = fftshift(fft(ifftshift(u)));
 %%%%%%%%%%
 
 result = FFT_Mc(1 + (c - 1) * M / 2 : (c + 1) * M / 2) ./ phi;
+
